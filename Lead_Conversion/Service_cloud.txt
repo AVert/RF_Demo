@@ -1,0 +1,145 @@
+*** Settings ***
+Suite Setup
+Library           Selenium2Library
+Library           ExcelLibrary
+Library           Collections
+Library           pabot.PabotLib
+
+*** Variables ***
+${Case object}    xpath=.//*[@id='Case_Tab']/a
+${New Case}       name=new
+${Case orgin}     xpath=.//*[@id='cas11']
+${Contact}        xpath=.//*[@id='cas3']    # Sample QA3 Test demo3
+${Account}        xpath=.//*[@id='cas4']
+${Sequence No}    xpath=.//*[@id='00N7F000000FreQ']
+${Case Reason}    xpath=.//*[@id='cas6']
+${Case type}      xpath=.//*[@id='cas5']
+${Case subject}    xpath=.//*[@id='cas14']
+${Description}    xpath=.//*[@id='cas15']
+${Save button}    name=save
+${Edit button}    name=edit
+${Close button}    name=close
+${Close case}     xpath=.//*[@id='cas7']
+${Internal comments}    xpath=.//*[@id='cas16']
+${Solution title}    xpath=.//*[@id='solTitle']
+${Solution details}    xpath=.//*[@id='solNote']
+${case status verify}    xpath=.//*[@id='cas7_ileinner']
+${Last modified}    xpath=.//*[@id='LastModifiedBy_ilecell']
+${Created by}     xpath=.//*[@id='CreatedBy_ileinner']
+${Case Edit page}    xpath=.//*[@id='efpViews_5007F000000UOnr_option1']/span[2]
+${username}       Id=username
+${password}       Id=password
+${BROWSER}        Firefox Chrome
+${Aco_Nam}        xpath=.//*[@id='7:3665;a']
+
+*** Test Cases ***
+CA_01
+    [Setup]
+    Open Browser    https://login.salesforce.com/
+    Maximize Browser Window
+    Input Text    ${username}    nallavansf@gmail.com
+    Input Text    ${password}    123nallavan@NALL
+    Click Element    Id=Login
+    Set Selenium Implicit Wait    50s
+    Sleep    15s
+    Click Element    ${Case object}
+    Wait Until Element Is Visible    ${New Case}
+    Sleep    15s
+    Click Element    ${New Case}
+    Wait Until Element Is Visible    ${Case orgin}
+    @{Case type1}=    Get List Items    ${Case type}
+    Select From List By Value    ${Case type}    @{Case type1}[3]
+    @{Reason}=    Get List Items    ${Case Reason}
+    Select From List By Value    ${Case Reason}    @{Reason}[2]
+    @{Orgin}=    Get List Items    ${Case orgin}
+    Select From List By Value    ${Case orgin}    @{Orgin}[3]
+    Input Text    ${Case subject}    Test QA Apirl
+    Input Text    ${Description}    Test Test Test Case
+    Input Text    ${Internal comments}    Internal Comment
+    Click Element    ${Save button}
+    Set Selenium Implicit Wait    20s
+    Wait Until Element Is Visible    ${case status verify}
+    Sleep    15s
+    Click Element    name=close
+    Wait Until Element Is Visible    ${Solution title}
+    @{status}=    Get List Items    xpath=.//*[@id='cas7']
+    Select From List By Value    xpath=.//*[@id='cas7']    @{status}[1]
+    Input Text    ${Solution title}    This case is closed now
+    Input Text    ${Solution details}    We are identified the issue, the user don't have permission from profile level
+    Click Element    ${Save button}
+    Wait Until Element Is Visible    ${case status verify}
+    ${Case status verification}=    Get Text    ${case status verify}
+    Log To Console    ${Case status verification}
+    ${Last modified user verification}=    Get Text    ${Last modified}
+    Log To Console    ${Last modified user verification}
+    ${Created by user verification}=    Get Text    ${Created by}
+    Log To Console    ${Created by user verification}
+    Close Browser
+
+CA_02
+    Login Salesforce
+    Maximize Browser Window
+    Input Text    ${username}    nallavansf@gmail.com
+    Input Text    ${password}    123nallavan@NALL
+    Click Element    Id=Login
+    Set Selenium Implicit Wait    50s
+    Sleep    15s
+    Click Element    ${Case object}
+    Wait Until Element Is Visible    ${New Case}
+    Sleep    15s
+    Click Element    ${New Case}
+    Wait Until Element Is Visible    ${Case orgin}
+    @{Case type1}=    Get List Items    ${Case type}
+    Select From List By Value    ${Case type}    @{Case type1}[3]
+    @{Reason}=    Get List Items    ${Case Reason}
+    Select From List By Value    ${Case Reason}    @{Reason}[2]
+    @{Orgin}=    Get List Items    ${Case orgin}
+    Select From List By Value    ${Case orgin}    @{Orgin}[3]
+    Input Text    ${Case subject}    Test QA Apirl
+    Input Text    ${Description}    Test Test Test Case
+    Input Text    ${Internal comments}    Internal Comment
+    Click Element    ${Save button}
+    Set Selenium Implicit Wait    20s
+    Wait Until Element Is Visible    ${case status verify}
+    Sleep    15s
+    Click Element    name=close
+    Wait Until Element Is Visible    ${Solution title}
+    @{status}=    Get List Items    xpath=.//*[@id='cas7']
+    Select From List By Value    xpath=.//*[@id='cas7']    @{status}[1]
+    Input Text    ${Solution title}    This case is closed now
+    Input Text    ${Solution details}    We are identified the issue, the user don't have permission from profile level
+    Click Element    ${Save button}
+    Wait Until Element Is Visible    ${case status verify}
+    ${Case status verification}=    Get Text    ${case status verify}
+    Log To Console    ${Case status verification}
+    ${Last modified user verification}=    Get Text    ${Last modified}
+    Log To Console    ${Last modified user verification}
+    ${Created by user verification}=    Get Text    ${Created by}
+    Log To Console    ${Created by user verification}
+    Close Browser
+
+Lightining
+    Open Browser    https://login.salesforce.com/
+    Maximize Browser Window
+    Input Text    ${username}    nallavansf@gmail.com
+    Input Text    ${password}    123nallavan@NALL
+    Click Element    Id=Login
+    Set Selenium Implicit Wait    50s
+    Click Element    xpath=.//*[@id='oneHeader']/div[3]/div/div[2]/nav/ul/li[4]/a
+    Sleep    15s
+    Click Element    xpath=html/body/div[5]/div[1]/section/div[1]/div[1]/div[2]/div/div/div[1]/div[1]/div[2]/ul/li[1]
+    Sleep    10s
+    Input Text    xpath=.//*[@id='181:3540;a']    7777777778
+    Input Text    xpath=.//*[@id='44:3540;a']    7777777779
+    Input Text    xpath=.//*[@id='143:3540;a']    Test QA Apirl
+    Input Text    xpath=.//*[@id='125:3540;a']    QA1
+    Input Text    xpath=.//*[@id='209:3540;a']    MSTQA-India
+    @{Rat}=    Get List Items    xpath=.//*[@id='553:3540;a']/div/a
+    Select From List By Value    xpath=.//*[@id='553:3540;a']/div/a    @{Rat}[Hot]
+    Click Element    xpath= html/body/div[5]/div[2]/div[3]/div[2]/div/div[3]/div/button[3]
+
+*** Keywords ***
+Case creation
+
+Login Salesforce
+    Open Browser    https://login.salesforce.com/

@@ -1,0 +1,4 @@
+*** Variables ***
+${Solution tab}    xpath=.//*[@id='Solution_Tab']/a
+
+*** Test Cases ***

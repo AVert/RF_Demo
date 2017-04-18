@@ -1,0 +1,593 @@
+*** Settings ***
+Library           Selenium2Library
+Library           ExcelLibrary
+Library           Collections
+Library           pabot.PabotLib
+Library           Process
+
+*** Variables ***
+@{Browser}        firefox    chrome
+${Lead tab}       xpath=.//*[@id='Lead_Tab']/a
+${New button}     name=new
+${firstname}      Id=name_firstlea2
+${Last name}      Id=name_lastlea2
+${Company}        Id=lea3
+${Phone No}       Id=lea8
+${Email}          Id=lea11
+${Rating}         xpath=.//*[@id='lea14']
+${Industry}       xpath=.//*[@id='lea6']
+${No.of location}    xpath=.//*[@id='00N2800000BRkq0']
+${A-Checkbox}     xpath=.//*[@id='00N2800000CQskU']
+${Excel}          C:\\Users\\Mstemp120\\Desktop\\Salesforce\\Lead_Conversion\\Excel.xls
+${Lead save}      xpath=.//*[@id='bottomButtonRow']/input[1]
+${username}       Id=username
+${password}       Id=password
+${Lead owner}     xpath=.//*[@id='lea1_ileinner']
+${Name}           xpath=.//*[@id='lea2_ileinner']
+${Lead Company}    xpath=.//*[@id='lea3_ileinner']
+${Lead Industry}    xpath=.//*[@id='lea6_ileinner']
+${Lead phone}     xpath=.//*[@id='lea8_ileinner']
+${Lead email}     xpath=.//*[@id='lea11_ileinner']
+${Lead status}    xpath=.//*[@id='lea13_ileinner']
+${Lead rating}    xpath=.//*[@id='lea14_ileinner']
+${Lead Created by}    xpath=.//*[@id='lea14_ileinner']
+${Conver button}    xpath=.//*[@id='topButtonRow']/input[5]
+${OwnerID}        xpath=.//*[@id='owner_id']
+${Accname}        xpath=.//*[@id='accid']
+${Convert status}    xpath=.//*[@id='tsk12_fu']
+${convert lead}    xpath=.//*[@id='topButtonRow']/input[1]
+${Account_name}    xpath=.//*[@id='acc2_ileinner']
+${Account rating}    xpath=.//*[@id='acc9_ileinner']
+${Accoun Industry}    xpath=.//*[@id='acc7_ileinner']
+${Oppotunity record}    xpath=.//*[@id='bodyCell']/div[3]/div[1]/div/div[2]/table/tbody/tr[2]/th/a
+${Opportunity_Tab}    xpath=.//*[@id='Opportunity_Tab']/a
+${Contact_Tab}    xpath=.//*[@id='Contact_Tab']/a
+${Contact_Record}    xpath=.//*[@id='bodyCell']/div[3]/div[1]/div/div[2]/table/tbody/tr[2]/th/a
+${Cont_owner}     xpath=.//*[@id='con1_ileinner']
+${Cont_acc_name}    xpath=.//*[@id='con4_ileinner']
+${Cont_Lead_Phone}    xpath=.//*[@id='con10_ileinner']
+${Cont_email}     xpath=.//*[@id='con15_ileinner']
+${Campagin window}    title=Campaign Lookup (New Window)
+${Lead window}    title=Lead Edit: New Lead ~ Salesforce - Developer Edition
+${table xpath}    xpath=.//*[@id='new']/div/div[2]/div/div[2]/table
+${Row}            tbody/tr
+${Tabel row}      ${table xpath}/${Row}
+&{Table}
+${Column}         ${table xpath}/${Row}/td
+${text}           Apple
+${Chrome}         D:/Softwares/chromedriver.exe
+${BROWSER}        Chrome
+
+*** Test Cases ***
+SF_01
+    [Documentation]    **Functionality**
+    ...    To verify the Account, Opportunity and contact object filed values are mapped correctly or not when user converting a new lead
+    ...
+    ...    **Test Steps**
+    ...    1. Open the browser and enter the url ""
+    ...    2. Enter the username and password and click log in button
+    ...    3. Click Lead object and then create a new lead record
+    ...    4. Verifiy the lead values and then click conver button in lead record
+    ...    5. Choose the account name and enter the input values in lead covertion edit page
+    ...    6. Click convert button, verify the lead is converted or not
+    ...    7. Click on Accounts object and then open the newly created record
+    ...    8. Verifiy the Accounts record field values and then click on Opportunity object
+    ...    9. Verify the Opportunity record field values and then click on Contact object
+    ...    10. Verify the Contact record field values
+    ...
+    ...    **Expected result**
+    ...    4.1 Lead should be converted into Accounts, Contacts and oppotunity
+    ...    8.1 Lead values should be mapped correctly in Account object field values
+    ...    9.1 Lead values should be mapped correctly in Opportunity object field values
+    ...    10.1 Lead values should be mapped correctly in Contact object field values
+    [Tags]    SF
+    [Setup]
+    [Timeout]
+    Browser
+    [Teardown]    Close browser
+
+SF_002
+    [Documentation]    **Functionality**
+    ...    To verify the Account, Opportunity and contact object filed values are mapped correctly or not when user converting a new lead
+    ...
+    ...    **Test Steps**
+    ...    1. Open the browser and enter the url ""
+    ...    2. Enter the username and password and click log in button
+    ...    3. Click Lead object and then create a new lead record
+    ...    4. Verifiy the lead values and then click conver button in lead record
+    ...    5. Choose the account name and enter the input values in lead covertion edit page
+    ...    6. Click convert button, verify the lead is converted or not
+    ...    7. Click on Accounts object and then open the newly created record
+    ...    8. Verifiy the Accounts record field values and then click on Opportunity object
+    ...    9. Verify the Opportunity record field values and then click on Contact object
+    ...    10. Verify the Contact record field values
+    ...
+    ...    **Expected result**
+    ...    4.1 Lead should be converted into Accounts, Contacts and oppotunity
+    ...    8.1 Lead values should be mapped correctly in Account object field values
+    ...    9.1 Lead values should be mapped correctly in Opportunity object field values
+    ...    10.1 Lead values should be mapped correctly in Contact object field values
+    [Setup]    Login salesforce
+    Lead Creation
+    ${Lead Owner1}=    Get Text    ${Lead owner}
+    Log To Console    ${Lead Owner1}
+    ${Name1}=    Get Text    ${Name}
+    Log To Console    ${Name1}
+    ${Lead Company1}=    Get Text    ${Lead Company}
+    Log To Console    ${Lead Company1}
+    ${Lead Industry1}=    Get Text    ${Lead Industry}
+    Log To Console    ${Lead Industry1}
+    ${Lead Phone1}=    Get Text    ${Lead phone}
+    Log To Console    ${Lead Phone1}
+    ${Lead email1}=    Get Text    ${Lead email}
+    Log To Console    ${Lead email1}
+    ${Lead staus1}=    Get Text    ${Lead status}
+    Log To Console    ${Lead staus1}
+    ${Lead rating1}=    Get Text    ${Lead rating}
+    Log To Console    ${Lead rating1}
+    ${Lead owner1}=    Get Text    ${Lead owner}
+    Log To Console    ${Lead owner1}
+    Lead Conversion
+    Wait Until Element Is Visible    ${Account_name}
+    ${Act rating1}=    Get Text    ${Account rating}
+    Log To Console    ${Act rating1}
+    ${Act industry1}=    Get Text    ${Accoun Industry}
+    Log To Console    ${Act industry1}
+    ${Accoun owner1}=    Get Text    xpath=.//*[@id='acc2_ileinner']
+    Log To Console    ${Accoun owner1}
+    ${Verification}=    Should Be Equal    ${Lead rating1}    ${Act rating1}    values=True
+    Log    ${Verification}
+    Set Selenium Implicit Wait    20s
+    Click Element    ${Opportunity_Tab}
+    Wait Until Element Is Visible    ${Oppotunity record}
+    Click Element    ${Oppotunity record}
+    ${Opp_Acc_name}=    Get Text    xpath=.//*[@id='opp4_ileinner']
+    Log To Console    ${Opp_Acc_name}
+    ${Opp_Stage}=    Get Text    xpath=.//*[@id='opp11_ileinner']
+    Log To Console    ${Opp_Stage}
+    ${Opp_Prob}=    Get Text    xpath=.//*[@id='opp12_ileinner']
+    Log To Console    ${Opp_Prob}
+    ${Opp_name}=    Get Text    xpath=.//*[@id='opp3_ilecell']
+    Log To Console    ${Opp_name}
+    ${verifycation1}=    Should Be Equal    ${Opp_Acc_name}    ${Lead Company1}    True
+    Log    ${verifycation1}
+    Set Selenium Implicit Wait    20s
+    Click Element    ${Contact_Tab}
+    Click Element    ${Contact_Record}
+    ${Contact_Name}=    Get Text    ${Cont_acc_name}
+    Log To Console    ${Contact_Name}
+    ${Contact_record_owner}=    Get Text    ${Cont_owner}
+    Log To Console    ${Contact_record_owner}
+    ${Contact_Email}=    Get Text    ${Cont_email}
+    Log To Console    ${Contact_Email}
+    ${verifycation2}=    Should Be Equal    ${Opp_Acc_name}    ${Contact_Name}    Value=True
+    Log    ${verifycation2}
+    Capture Page Screenshot
+    Selenium2Library.Close Browser
+
+SF_03
+    [Documentation]    **Functionality**
+    ...    To verify the Account, Opportunity and contact object filed values are mapped correctly or not when user converting a new lead
+    ...
+    ...    **Test Steps**
+    ...    1. Open the browser and enter the url ""
+    ...    2. Enter the username and password and click log in button
+    ...    3. Click Lead object and then create a new lead record
+    ...    4. Verifiy the lead values and then click conver button in lead record
+    ...    5. Choose the account name and enter the input values in lead covertion edit page
+    ...    6. Click convert button, verify the lead is converted or not
+    ...    7. Click on Accounts object and then open the newly created record
+    ...    8. Verifiy the Accounts record field values and then click on Opportunity object
+    ...    9. Verify the Opportunity record field values and then click on Contact object
+    ...    10. Verify the Contact record field values
+    ...
+    ...    **Expected result**
+    ...    4.1 Lead should be converted into Accounts, Contacts and oppotunity
+    ...    8.1 Lead values should be mapped correctly in Account object field values
+    ...    9.1 Lead values should be mapped correctly in Opportunity object field values
+    ...    10.1 Lead values should be mapped correctly in Contact object field values
+    [Setup]    Login salesforce
+    Lead Creation
+    ${Lead Owner1}=    Get Text    ${Lead owner}
+    Log To Console    ${Lead Owner1}
+    ${Name1}=    Get Text    ${Name}
+    Log To Console    ${Name1}
+    ${Lead Company1}=    Get Text    ${Lead Company}
+    Log To Console    ${Lead Company1}
+    ${Lead Industry1}=    Get Text    ${Lead Industry}
+    Log To Console    ${Lead Industry1}
+    ${Lead Phone1}=    Get Text    ${Lead phone}
+    Log To Console    ${Lead Phone1}
+    ${Lead email1}=    Get Text    ${Lead email}
+    Log To Console    ${Lead email1}
+    ${Lead staus1}=    Get Text    ${Lead status}
+    Log To Console    ${Lead staus1}
+    ${Lead rating1}=    Get Text    ${Lead rating}
+    Log To Console    ${Lead rating1}
+    ${Lead owner1}=    Get Text    ${Lead owner}
+    Log To Console    ${Lead owner1}
+    Lead Conversion
+    Wait Until Element Is Visible    ${Account_name}
+    ${Act rating1}=    Get Text    ${Account rating}
+    Log To Console    ${Act rating1}
+    ${Act industry1}=    Get Text    ${Accoun Industry}
+    Log To Console    ${Act industry1}
+    ${Accoun owner1}=    Get Text    xpath=.//*[@id='acc2_ileinner']
+    Log To Console    ${Accoun owner1}
+    ${Verification}=    Should Be Equal    ${Lead rating1}    ${Act rating1}    values=True
+    Log    ${Verification}
+    Set Selenium Implicit Wait    20s
+    Click Element    ${Opportunity_Tab}
+    Wait Until Element Is Visible    ${Oppotunity record}
+    Click Element    ${Oppotunity record}
+    ${Opp_Acc_name}=    Get Text    xpath=.//*[@id='opp4_ileinner']
+    Log To Console    ${Opp_Acc_name}
+    ${Opp_Stage}=    Get Text    xpath=.//*[@id='opp11_ileinner']
+    Log To Console    ${Opp_Stage}
+    ${Opp_Prob}=    Get Text    xpath=.//*[@id='opp12_ileinner']
+    Log To Console    ${Opp_Prob}
+    ${Opp_name}=    Get Text    xpath=.//*[@id='opp3_ilecell']
+    Log To Console    ${Opp_name}
+    ${verifycation1}=    Should Be Equal    ${Opp_Acc_name}    ${Lead Company1}    True
+    Log    ${verifycation1}
+    Set Selenium Implicit Wait    20s
+    Click Element    ${Contact_Tab}
+    Click Element    ${Contact_Record}
+    ${Contact_Name}=    Get Text    ${Cont_acc_name}
+    Log To Console    ${Contact_Name}
+    ${Contact_record_owner}=    Get Text    ${Cont_owner}
+    Log To Console    ${Contact_record_owner}
+    ${Contact_Email}=    Get Text    ${Cont_email}
+    Log To Console    ${Contact_Email}
+    ${verifycation2}=    Should Be Equal    ${Opp_Acc_name}    ${Contact_Name}    Value=True
+    Log    ${verifycation2}
+    Capture Page Screenshot
+    Close Browser
+
+SF_04
+    [Documentation]    **Functionality**
+    ...    To verify the Account, Opportunity and contact object filed values are mapped correctly or not when user converting a new lead
+    ...
+    ...    **Test Steps**
+    ...    1. Open the browser and enter the url ""
+    ...    2. Enter the username and password and click log in button
+    ...    3. Click Lead object and then create a new lead record
+    ...    4. Verifiy the lead values and then click conver button in lead record
+    ...    5. Choose the account name and enter the input values in lead covertion edit page
+    ...    6. Click convert button, verify the lead is converted or not
+    ...    7. Click on Accounts object and then open the newly created record
+    ...    8. Verifiy the Accounts record field values and then click on Opportunity object
+    ...    9. Verify the Opportunity record field values and then click on Contact object
+    ...    10. Verify the Contact record field values
+    ...
+    ...    **Expected result**
+    ...    4.1 Lead should be converted into Accounts, Contacts and oppotunity
+    ...    8.1 Lead values should be mapped correctly in Account object field values
+    ...    9.1 Lead values should be mapped correctly in Opportunity object field values
+    ...    10.1 Lead values should be mapped correctly in Contact object field values
+    [Setup]    Login salesforce
+    Lead1
+    ${Lead Owner1}=    Get Text    ${Lead owner}
+    Log To Console    ${Lead Owner1}
+    ${Name1}=    Get Text    ${Name}
+    Log To Console    ${Name1}
+    ${Lead Company1}=    Get Text    ${Lead Company}
+    Log To Console    ${Lead Company1}
+    ${Lead Industry1}=    Get Text    ${Lead Industry}
+    Log To Console    ${Lead Industry1}
+    ${Lead Phone1}=    Get Text    ${Lead phone}
+    Log To Console    ${Lead Phone1}
+    ${Lead email1}=    Get Text    ${Lead email}
+    Log To Console    ${Lead email1}
+    ${Lead staus1}=    Get Text    ${Lead status}
+    Log To Console    ${Lead staus1}
+    ${Lead rating1}=    Get Text    ${Lead rating}
+    Log To Console    ${Lead rating1}
+    ${Lead owner1}=    Get Text    ${Lead owner}
+    Log To Console    ${Lead owner1}
+    Set Selenium Implicit Wait    50s
+    Click Element    ${Conver button}
+    @{Lead_Account_name}=    Get List Items    ${Accname}
+    Select From List By Value    ${Accname}    @{Lead_Account_name}[3]
+    Wait Until Element Is Visible    xpath=.//*[@id='tsk5_fu']
+    Input Text    xpath=.//*[@id='tsk5_fu']    New Lead converted
+    Set Selenium Implicit Wait    20s
+    Click Element    ${convert lead}
+    Wait Until Element Is Visible    ${Account_name}
+    ${Act rating1}=    Get Text    ${Account rating}
+    Log To Console    ${Act rating1}
+    ${Act industry1}=    Get Text    ${Accoun Industry}
+    Log To Console    ${Act industry1}
+    ${Accoun owner1}=    Get Text    xpath=.//*[@id='acc2_ileinner']
+    Log To Console    ${Accoun owner1}
+    ${Verification}=    Should Be Equal    ${Lead rating1}    ${Act rating1}    values=True
+    Log    ${Verification}
+    Set Selenium Implicit Wait    20s
+    Click Element    ${Opportunity_Tab}
+    Wait Until Element Is Visible    ${Oppotunity record}
+    Click Element    ${Oppotunity record}
+    ${Opp_Acc_name}=    Get Text    xpath=.//*[@id='opp4_ileinner']
+    Log To Console    ${Opp_Acc_name}
+    ${Opp_Stage}=    Get Text    xpath=.//*[@id='opp11_ileinner']
+    Log To Console    ${Opp_Stage}
+    ${Opp_Prob}=    Get Text    xpath=.//*[@id='opp12_ileinner']
+    Log To Console    ${Opp_Prob}
+    ${Opp_name}=    Get Text    xpath=.//*[@id='opp3_ilecell']
+    Log To Console    ${Opp_name}
+    ${verifycation1}=    Should Be Equal    ${Opp_Acc_name}    ${Lead Company1}    True
+    Log    ${verifycation1}
+    Set Selenium Implicit Wait    20s
+    Click Element    ${Contact_Tab}
+    Click Element    ${Contact_Record}
+    ${Contact_Name}=    Get Text    ${Cont_acc_name}
+    Log To Console    ${Contact_Name}
+    ${Contact_record_owner}=    Get Text    ${Cont_owner}
+    Log To Console    ${Contact_record_owner}
+    ${Contact_Email}=    Get Text    ${Cont_email}
+    Log To Console    ${Contact_Email}
+    ${verifycation2}=    Should Be Equal    ${Opp_Acc_name}    ${Contact_Name}    Value=True
+    Log    ${verifycation2}
+    Capture Page Screenshot
+    Close Browser
+
+Lookup
+    [Setup]    Login salesforce
+    Selenium2Library.Set Selenium Implicit Wait    50s
+    Click Element    ${Lead tab}
+    Sleep    5s
+    Click Element    ${New button}
+    Wait Until Element Is Visible    ${Last name}
+    Input Text    ${firstname}    Sample QA6
+    Input Text    ${Last name}    Test demo6
+    Input Text    ${Company}    ABCD
+    ${Lead Title}=    Get Title
+    Log To Console    ${Lead Title}
+    Click Element    xpath=.//*[@id='lea20_lkwgt']
+    Set Selenium Implicit Wait    50s
+    Sleep    10s
+    Select Window    title=Search ~ Salesforce - Developer Edition
+    ${Lead Lookup}=    Get Title
+    Log To Console    ${Lead Lookup}
+    Select Frame    name=resultsFrame
+    Log    nullllll
+    Click Element    ${table xpath}
+    ${Row Count}=    Get Matching Xpath Count    xpath=.//*[@id='new']/div/div[2]/div/div[2]/table/tbody/tr
+    : FOR    ${i}    IN RANGE    1    ${Row Count}+1
+    \    Log    ${i}
+    \    ${Getvalue}=    Get Text    xpath=.//*[@id='new']/div/div[2]/div/div[2]/table/tbody/tr[${i}]/th
+    \    Log    ${Getvalue}
+    \    Run Keyword If    "${Getvalue}"=="Apple"    Close Window
+    \    Run Keyword If    "${Getvalue}"=="Apple"    Select Window    ${Lead window}
+    \    Exit For Loop If    "${Getvalue}"=="Apple"
+    Input Text    ${Phone No}    7777777777
+    Input Text    xpath=.//*[@id='lea20']    ${Getvalue}
+    Input Text    ${Email}    nall11sf@gmail.com
+    @{Rating1}=    Get List Items    ${Rating}
+    Select From List By Value    ${Rating}    @{Rating1}[3]
+    @{Industry1}=    Get List Items    ${Industry}
+    Select From List By Value    ${Industry}    @{Industry1}[4]
+    Wait Until Element Is Visible    ${Lead save}
+    Click Element    ${Lead save}
+    Close browser
+
+Lookup Text
+    [Setup]    Login salesforce
+    Selenium2Library.Set Selenium Implicit Wait    50s
+    Click Element    ${Lead tab}
+    Click Element    ${New button}
+    Wait Until Element Is Visible    ${Last name}
+    Input Text    ${firstname}    Sample QA6
+    Input Text    ${Last name}    Test demo6
+    Input Text    ${Company}    ABCD
+    ${Lead Title}=    Get Title
+    Log To Console    ${Lead Title}
+    Input Text    xpath=.//*[@id='lea20']    Apple
+    Input Text    ${Phone No}    7777777777
+    Input Text    ${Email}    nall11sf@gmail.com
+    @{Rating1}=    Get List Items    ${Rating}
+    Select From List By Value    ${Rating}    @{Rating1}[3]
+    @{Industry1}=    Get List Items    ${Industry}
+    Select From List By Value    ${Industry}    @{Industry1}[4]
+    Wait Until Element Is Visible    ${Lead save}
+    Click Element    ${Lead save}
+    Capture Page Screenshot
+    Close browser
+
+Chrome
+    Open Browser    https://login.salesforce.com/    Chrome
+    Maximize Browser Window
+    Input Text    ${username}    nallavansf@gmail.com
+    Input Text    ${password}    123nallavan@NALL
+    Click Element    Id=Login
+    Selenium2Library.Set Selenium Implicit Wait    50s
+    Click Element    ${Lead tab}
+    Click Element    ${New button}
+    Wait Until Element Is Visible    ${Last name}
+    Input Text    ${firstname}    Sample QA6
+    Input Text    ${Last name}    Test demo6
+    Input Text    ${Company}    ABCD
+    ${Lead Title}=    Get Title
+    Log To Console    ${Lead Title}
+    Input Text    xpath=.//*[@id='lea20']    Apple
+    Input Text    ${Phone No}    7777777777
+    Input Text    ${Email}    nall11sf@gmail.com
+    @{Rating1}=    Get List Items    ${Rating}
+    Select From List By Value    ${Rating}    @{Rating1}[3]
+    @{Industry1}=    Get List Items    ${Industry}
+    Select From List By Value    ${Industry}    @{Industry1}[4]
+    Wait Until Element Is Visible    ${Lead save}
+    Click Element    ${Lead save}
+    Close browser
+
+*** Keywords ***
+Login salesforce
+    Maximize Browser Window
+    Open Excel Current Directory    ${Excel}
+    ${Name}=    Get Sheet Names
+    Log    ${Name}
+    ${username1}=    Read Cell Data By Name    Sheet1    A2
+    Input Text    ${username}    ${username1}
+    ${password1}=    Read Cell Data By Name    Sheet1    B2
+    Input Text    ${password}    ${password1}
+    Click Element    Id=Login
+    Sleep    10s
+
+Lead Creation
+    Selenium2Library.Set Selenium Implicit Wait    50s
+    Click Element    ${Lead tab}
+    Wait Until Element Is Visible    ${New button}
+    Click Element    ${New button}
+    Wait Until Element Is Visible    ${Last name}
+    Input Text    ${firstname}    Sample QA17
+    Input Text    ${Last name}    Test demo118
+    Input Text    ${Company}    Meta Soft
+    Input Text    ${Phone No}    7777777777
+    Input Text    ${Email}    nall11sf@gmail.com
+    @{Rating1}=    Get List Items    ${Rating}
+    Select From List By Value    ${Rating}    @{Rating1}[3]
+    @{Industry1}=    Get List Items    ${Industry}
+    Select From List By Value    ${Industry}    @{Industry1}[4]
+    Wait Until Element Is Visible    ${Lead save}
+    Click Element    ${Lead save}
+
+Log into Console
+    ${Lead Owner1}=    Get Text    ${Lead owner}
+    Log To Console    ${Lead Owner1}
+    ${Name1}=    Get Text    ${Name}
+    Log    ${Name1}
+    ${Lead Company1}=    Get Text    ${Lead Company}
+    Log    ${Lead Company1}
+    ${Lead Industry1}=    Get Text    ${Lead Industry}
+    Log To Console    ${Lead Industry1}
+    ${Lead Phone1}=    Get Text    ${Lead phone}
+    Log    ${Lead Phone1}
+    ${Lead email1}=    Get Text    ${Lead email}
+    Log    ${Lead email1}
+    ${Lead staus1}=    Get Text    ${Lead status}
+    Log    ${Lead staus1}
+    ${Lead rating1}=    Get Text    ${Lead rating}
+    Log Dictionary    ${Lead rating1}
+    ${Lead owner1}=    Get Text    ${Lead owner}
+    Log    ${Lead owner1}
+
+Lead Conversion
+    Set Selenium Implicit Wait    50s
+    Click Element    ${Conver button}
+    Wait Until Element Is Visible    xpath=.//*[@id='tsk5_fu']
+    @{Account}=    Get List Items    xpath=.//*[@id='accid']
+    Select From List    xpath=.//*[@id='accid']    @{Account}[2]
+    Input Text    xpath=.//*[@id='tsk5_fu']    New Lead converted
+    Set Selenium Implicit Wait    20s
+    Click Element    ${convert lead}
+
+Account verification
+    Wait Until Element Is Visible    ${Account_name}
+    : FOR    ${INDEX}    IN RANGE    900
+    \    Log    ${INDEX}
+    \    Scroll To Page    900    ${INDEX}
+    ${Act rating1}=    Get Text    ${Account rating}
+    Log To Console    ${Act rating1}
+    ${Act industry1}=    Get Value    ${Account Industry}
+    Log    ${Act industry1}
+    ${Accoun owner1}=    Get Value    xpath=.//*[@id='lookup00528000002k6myacc1']
+    Log    ${Accoun owner1}
+
+Scroll To Page
+    [Arguments]    ${width}    ${height}
+    Execute Javascript    window.scrollTo(${width}, ${height})
+
+Lead1
+    Selenium2Library.Set Selenium Implicit Wait    50s
+    Click Element    ${Lead tab}
+    Wait Until Element Is Visible    ${New button}
+    Click Element    ${New button}
+    Wait Until Element Is Visible    ${Last name}
+    Input Text    ${firstname}    Sample QA21
+    Input Text    ${Last name}    Test demo19
+    Input Text    ${Company}    Metasoft
+    Input Text    ${Phone No}    7777777777
+    Input Text    ${Email}    nallavanece92@gmail.com
+    @{Rating1}=    Get List Items    ${Rating}
+    Select From List By Value    ${Rating}    @{Rating1}[3]
+    @{Industry1}=    Get List Items    ${Industry}
+    Select From List By Value    ${Industry}    @{Industry1}[4]
+    Wait Until Element Is Visible    ${Lead save}
+    Click Element    ${Lead save}
+
+Lead Excel
+    Selenium2Library.Set Selenium Implicit Wait    50s
+    Click Element    ${Lead tab}
+    Click Element    ${New button}
+    Open Excel Current Directory    ${Excel}
+    ${Name}=    Get Sheet Names
+    Log    ${Name}
+    ${LeadfirstNmae}=    ExcelLibrary.Read Cell Data By Coordinates    Sheet2    B1    C1
+    Input Text    ${firstname}    ${LeadfirstNmae}
+    ${LeadlasttNmae}=    ExcelLibrary.Read Cell Data By Coordinates    Sheet2    B2    C2
+    Input Text    ${Last name}    ${LeadlasttNmae}
+
+Close browser
+    Selenium2Library.Close Browser
+
+Browser
+    : FOR    ${Brow}    IN    @{Browser}
+    \    Open Browser    http://login.salesforce.com/    ${Brow}
+    \    Login salesforce
+    \    Crossbrowser
+
+Crossbrowser
+    Lead1
+    ${Lead Owner1}=    Get Text    ${Lead owner}
+    Log To Console    ${Lead Owner1}
+    ${Name1}=    Get Text    ${Name}
+    Log To Console    ${Name1}
+    ${Lead Company1}=    Get Text    ${Lead Company}
+    Log To Console    ${Lead Company1}
+    ${Lead Industry1}=    Get Text    ${Lead Industry}
+    Log To Console    ${Lead Industry1}
+    ${Lead Phone1}=    Get Text    ${Lead phone}
+    Log To Console    ${Lead Phone1}
+    ${Lead email1}=    Get Text    ${Lead email}
+    Log To Console    ${Lead email1}
+    ${Lead staus1}=    Get Text    ${Lead status}
+    Log To Console    ${Lead staus1}
+    ${Lead rating1}=    Get Text    ${Lead rating}
+    Log To Console    ${Lead rating1}
+    ${Lead owner1}=    Get Text    ${Lead owner}
+    Log To Console    ${Lead owner1}
+    Lead Conversion
+    Wait Until Element Is Visible    ${Account_name}
+    ${Act rating1}=    Get Text    ${Account rating}
+    Log To Console    ${Act rating1}
+    ${Act industry1}=    Get Text    ${Accoun Industry}
+    Log To Console    ${Act industry1}
+    ${Accoun owner1}=    Get Text    xpath=.//*[@id='acc2_ileinner']
+    Log To Console    ${Accoun owner1}
+    ${Verification}=    Should Be Equal    ${Lead rating1}    ${Act rating1}    values=True
+    Log    ${Verification}
+    Set Selenium Implicit Wait    20s
+    Click Element    ${Opportunity_Tab}
+    Wait Until Element Is Visible    ${Oppotunity record}
+    Click Element    ${Oppotunity record}
+    ${Opp_Acc_name}=    Get Text    xpath=.//*[@id='opp4_ileinner']
+    Log To Console    ${Opp_Acc_name}
+    ${Opp_Stage}=    Get Text    xpath=.//*[@id='opp11_ileinner']
+    Log To Console    ${Opp_Stage}
+    ${Opp_Prob}=    Get Text    xpath=.//*[@id='opp12_ileinner']
+    Log To Console    ${Opp_Prob}
+    ${Opp_name}=    Get Text    xpath=.//*[@id='opp3_ilecell']
+    Log To Console    ${Opp_name}
+    ${verifycation1}=    Should Be Equal    ${Opp_Acc_name}    ${Lead Company1}    True
+    Log    ${verifycation1}
+    Set Selenium Implicit Wait    20s
+    Click Element    ${Contact_Tab}
+    Click Element    ${Contact_Record}
+    ${Contact_Name}=    Get Text    ${Cont_acc_name}
+    Log To Console    ${Contact_Name}
+    ${Contact_record_owner}=    Get Text    ${Cont_owner}
+    Log To Console    ${Contact_record_owner}
+    ${Contact_Email}=    Get Text    ${Cont_email}
+    Log To Console    ${Contact_Email}
+    ${verifycation2}=    Should Be Equal    ${Opp_Acc_name}    ${Contact_Name}    True
+    Log    ${verifycation2}
+    Capture Page Screenshot

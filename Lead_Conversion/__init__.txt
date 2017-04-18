@@ -1,0 +1,8 @@
+*** Settings ***
+Suite Setup
+Suite Teardown
+Test Setup
+Test Teardown
+
+*** Variables ***
+${BROWSER}        Firefox Chrome

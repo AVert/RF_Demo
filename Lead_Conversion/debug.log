@@ -1,0 +1,4 @@
+[0406/165255.533:ERROR:process_reader_win.cc(114)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights.  (0xc0000022)
+[0406/165255.549:ERROR:exception_snapshot_win.cc(87)] thread ID 13800 not found in process
+[0406/165255.549:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::Initialize failed
+[0407/185330.899:ERROR:file_io_win.cc(163)] CreateFile C:\Users\MSTEMP~1\AppData\Local\Temp\scoped_dir5320_25458\Crashpad\settings.dat: The process cannot access the file because it is being used by another process. (0x20)
