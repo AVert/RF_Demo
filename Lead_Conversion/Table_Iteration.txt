@@ -1,0 +1,97 @@
+*** Settings ***
+Library           Selenium2Library
+Library           BuiltIn
+Library           Collections
+Library           BuiltIn
+Resource          Tabel.py
+Library           OperatingSystem
+
+*** Variables ***
+${table xpath}    .//*[@id='bodyCell']/div[3]/div[1]/div/div[2]/table/tbody
+${account}        xpath=.//*[@id='Account_Tab']/a
+${Row}            tr
+${Tabel row}      ${table xpath}/${Row}
+&{Table}
+${Column}         ${table xpath}/${Row}/td
+${text}           ABC
+
+*** Test Cases ***
+Table 1
+    [Template]
+    Open the Instance
+    Click on obejcet
+    sleep    5s
+    @{List}=    Get Webelement    ${Tabel row}
+    Log    @{List}
+    ${Row Count}=    Get Matching Xpath Count    ${Tabel row}
+    Set Suite Variable    ${Row Count}
+    : FOR    ${INDEX}    IN RANGE    1    ${Row Count}+1
+    \    Log    ${INDEX}
+    \    Append To List    @{List}
+    \    @{ColList}=    Get Webelement    @{List}[${Row Count}]/td
+    \    Log    @{ColList}
+    \    ${Colcount}=    Get Matching Xpath Count    @{List}[${Row Count}]/td
+    \    Set Suite Variable    ${Colcount}
+    \    Append To List    @{ColList}
+    \    Continue For Loop If    ${INDEX}>>${Colcount}
+    : FOR    ${COUNT}    IN RANGE    0    ${Colcount}
+    ${Text}=    Get Text    &{Table}/td[$Colcount}]
+    Set Suite Variable    ${Text}
+    Run Keyword    ${Text}==${text}
+    Click Element    ${Tablr row}[${INDEX}]/td[${colun}]
+    ${Colcount}
+
+Table 2
+    Open the Instance
+    Click on obejcet
+    Sleep    10s
+    ${Row Count}=    Get Matching Xpath Count    ${Tabel row}
+    Set Suite Variable    ${Row Count}
+    : FOR    ${INDEX}    IN RANGE    1    ${Row Count}+1
+    \    Log    ${INDEX}
+    \    ${Colcount}=    Get Matching Xpath Count    ${Tabel row}[${INDEX}]/td
+    \    Log    ${Colcount}
+    Sleep    10s
+    Click Element    xpath=.//th[@class='dataCell']/a[contains(.,'ABC')]
+    Run Keyword    ${Actual}==${text}
+    Click Element    ${Tablr row}[${INDEX}]/td[${colun}]
+
+Tabel3
+    Open the Instance
+    Click on obejcet
+    Sleep    10s
+    ${Row Count}=    Get Matching Xpath Count    ${Tabel row}
+    : FOR    ${INDEX}    IN RANGE    1    ${Row Count}+1
+    \    Log    ${INDEX}
+    \    ${Colcount}=    Get Matching Xpath Count    ${Tabel row}[${INDEX}]/td
+    \    Log    ${Colcount}
+    \    ${Getvalue}=    Get Text    xpath=.//*[@id='bodyCell']/div[3]/div[1]/div/div[2]/table/tbody/tr[${INDEX}]/th
+    \    Log    ${Getvalue}
+    \    Run Keyword If    "${Getvalue}"=="${text}"    Click Element    xpath=.//*[@id='bodyCell']/div[3]/div[1]/div/div[2]/table/tbody/tr[${INDEX}]/th/a
+    Sleep    10s
+    Click Element    name=edit
+    Wait Until Element Is Visible    xpath=.//*[@id='acc8']
+    Input Text    xpath=.//*[@id='acc8']    2000
+    Click Element    name=save
+
+*** Keywords ***
+Open the Instance
+    Open Browser    https://login.salesforce.com/    Firefox
+    Maximize Browser Window
+    Input Text    Id=username    nallavansf@gmail.com
+    Input Text    Id=password    123nallavan@NALL
+    Click Element    Id=Login
+    Sleep    5s
+
+Click on obejcet
+    Wait Until Element Is Visible    ${account}
+    Click Element    ${account}
+    Run Keyword And Return    Get Matching Xpath Count    ${table xpath}
+    Click Element    ${table xpath}
+    ${Elem}=    Get Webelements    ${table xpath}
+
+Get Row value
+    [Arguments]    ${List}    ${Row}
+    ${Row Count}=    Get Matching Xpath Count    ${Tablr row}
+    : FOR    ${INDEX}    IN RANGE    1    ${Row Count}+1
+    \    ${Text}    Get Text
