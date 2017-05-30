@@ -35,7 +35,7 @@ ${Aco_Nam}        xpath=.//*[@id='7:3665;a']
 *** Test Cases ***
 CA_01
     [Setup]
-    Open Browser    https://login.salesforce.com/
+    Open Browser    https://login.salesforce.com/  ${BROWSER}
     Maximize Browser Window
     Input Text    ${username}    nallavansf@gmail.com
     Input Text    ${password}    123nallavan@NALL
@@ -119,7 +119,7 @@ CA_02
     Close Browser
 
 Lightining
-    Open Browser    https://login.salesforce.com/
+    Open Browser    https://login.salesforce.com/   ${BROWSER}
     Maximize Browser Window
     Input Text    ${username}    nallavansf@gmail.com
     Input Text    ${password}    123nallavan@NALL
