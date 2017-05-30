@@ -142,4 +142,4 @@ Lightining
 Case creation
 
 Login Salesforce
-    Open Browser    https://login.salesforce.com/    gc
+    Open Browser    https://login.salesforce.com/   
