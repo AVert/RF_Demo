@@ -35,16 +35,16 @@ ${Aco_Nam}        xpath=.//*[@id='7:3665;a']
 *** Test Cases ***
 CA_01
     [Setup]
-    Open Browser    https://login.salesforce.com/  ${BROWSER}
+    Open Browser    https://login.salesforce.com/
     Maximize Browser Window
     Input Text    ${username}    nallavansf@gmail.com
     Input Text    ${password}    123nallavan@NALL
     Click Element    Id=Login
     Set Selenium Implicit Wait    50s
-    Sleep    15s
+    Sleep    10s
     Click Element    ${Case object}
     Wait Until Element Is Visible    ${New Case}
-    Sleep    15s
+    Sleep    10s
     Click Element    ${New Case}
     Wait Until Element Is Visible    ${Case orgin}
     @{Case type1}=    Get List Items    ${Case type}
@@ -119,7 +119,7 @@ CA_02
     Close Browser
 
 Lightining
-    Open Browser    https://login.salesforce.com/   ${BROWSER}
+    Open Browser    https://login.salesforce.com/
     Maximize Browser Window
     Input Text    ${username}    nallavansf@gmail.com
     Input Text    ${password}    123nallavan@NALL
@@ -142,4 +142,4 @@ Lightining
 Case creation
 
 Login Salesforce
-    Open Browser    https://login.salesforce.com/
+    Open Browser    https://login.salesforce.com/    gc
