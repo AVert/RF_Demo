@@ -29,13 +29,13 @@ ${Created by}     xpath=.//*[@id='CreatedBy_ileinner']
 ${Case Edit page}    xpath=.//*[@id='efpViews_5007F000000UOnr_option1']/span[2]
 ${username}       Id=username
 ${password}       Id=password
-${BROWSER}        Firefox Chrome
+${BROWSER}        Chrome
 ${Aco_Nam}        xpath=.//*[@id='7:3665;a']
 
 *** Test Cases ***
 CA_01
     [Setup]
-    Open Browser    https://login.salesforce.com/
+    Open Browser    https://login.salesforce.com/   ${BROWSER}
     Maximize Browser Window
     Input Text    ${username}    nallavansf@gmail.com
     Input Text    ${password}    123nallavan@NALL
