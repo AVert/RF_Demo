@@ -1,7 +1,6 @@
 *** Settings ***
 Library           Selenium2Library
 Library           BuiltIn
-
 *** Variables ***
 ${Department}     xpath=.//*[@id='sidebar_nav']/li[1]/a
 ${Catagory}       xpath=.//*[@id='sidebar_nav']/li[1]/ul/li[2]/a
@@ -23,14 +22,12 @@ ${Exp Year}       Id=cc_exp_year
 ${Secuirty code}    Id=cc_code
 ${Terms&Condn}    Id=agree
 ${Placed order button}    xpath=.//*[@id='authorize_button']
-
 *** Test Cases ***
 REG_01
     Open the dealer
     Select Product
     Click Element    ${Checkout}
     Close Browser
-
 REG_02
     Open the dealer
     Select Product
@@ -39,12 +36,10 @@ REG_02
     Click Element    ${Checkout}
     Enter the Checkout details
     Checkout the product
-
 *** Keywords ***
 Open the dealer
     Open Browser    http://testdealer3.gearfire.com/
     Maximize Browser Window
-
 Select Product
     Click Element    ${Department}
     Wait Until Element Is Visible    ${Catagory}
@@ -56,7 +51,6 @@ Select Product
     Wait Until Element Is Visible    ${Product}
     Click Element    ${Product}
     Set Selenium Implicit Wait    50s
-
 Enter the Checkout details
     Wait Until Element Is Visible    ${Shipping Preference}
     sleep     10s
@@ -74,7 +68,6 @@ Enter the Checkout details
     @{State1}=    Get List Items    ${State}
     Select From List By Value    ${State}    @{State1}[2]
     Input Text    ${Secuirty code}    786
-
 Checkout the product
     Click Element    ${Terms&Condn}
     Click Element    ${Placed order button}
@@ -88,7 +81,6 @@ Checkout the product
     Capture Page Screenshot
     Get Window Titles
     Close Browser
-
 Scroll To Page
     [Arguments]    ${width}    ${height}
     Execute Javascript    window.scrollTo(${width} , ${height})
