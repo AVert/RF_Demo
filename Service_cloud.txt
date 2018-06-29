@@ -38,7 +38,7 @@ CA_01
     Open Browser    https://login.salesforce.com/
     Maximize Browser Window
     Input Text    ${username}    nallavansf@gmail.com
-    Input Text    ${password}    123nallavan@NAL
+    Input Text    ${password}    metasoft@123
     Click Element    Id=Login
     Set Selenium Implicit Wait    50s
     Sleep    15s
@@ -80,7 +80,7 @@ CA_02
     Login Salesforce
     Maximize Browser Window
     Input Text    ${username}    nallavansf@gmail.com
-    Input Text    ${password}    123nallavan@NAL
+    Input Text    ${password}    metasoft@123
     Click Element    Id=Login
     Set Selenium Implicit Wait    50s
     Sleep    15s
