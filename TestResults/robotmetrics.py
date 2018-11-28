@@ -17,10 +17,10 @@ from email import encoders
 # ======= START OF EMAIL SETUP CONTENT ====== #
 server = smtplib.SMTP('smtp.gmail.com:587')
 msg = MIMEMultipart() 
-msg['Subject'] = 'MyProject Automation Status'
+msg['Subject'] = 'ADFProject Automation Status'
 
 sender = 'nallavan.qa@gmail.com'
-recipients = ['nallavan@mstsolutions.com', 'madhumitha@mstsolutions.com']
+recipients = ['nallavan.qa@gmail.com']
 ccrecipients = ['nall1sf@gmail.com', 'user4@yahoo.com']
 
 msg['From'] = sender
@@ -35,7 +35,7 @@ msg.add_header('Content-Type', 'text/html')
 # ======================== START OF CUSTOMIZE REPORT ================================== #
 
 # URL or filepath of your company logo
-logo = "C:\Users\Mstemp120\Desktop\MST"
+logo = "https://www.mstsolutions.com/app/uploads/2018/06/MST_Logo-2.png "
 
 # Ignores following library keywords in metrics report
 ignore_library = [
@@ -315,12 +315,12 @@ icons_txt= """
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a style="color:blue;" class="tablink nav-link" target="_blank" href="https://www.github.com">
+                            <a style="color:blue;" class="tablink nav-link" target="_blank" href="https://github.com/Nall11G/RF_Demo">
 							  <i class="fa fa-external-link"></i> Git Hub
 							</a>
                         </li>
 						<li class="nav-item">
-                            <a style="color:blue;" class="tablink nav-link" target="_blank" href="https://www.jira.com">
+                            <a style="color:blue;" class="tablink nav-link" target="_blank" href="https://mstadfm.atlassian.net/browse/ADFM-1104">
 							  <i class="fa fa-external-link"></i> JIRA
 							</a>
                         </li>
