@@ -1,11 +1,10 @@
-1529316781507	geckodriver	INFO	Listening on 127.0.0.1:57186
-1529316783507	mozprofile::profile	INFO	Using profile path C:\Users\MSTEMP~1\AppData\Local\Temp\rust_mozprofile.LRZpqBfKfPcm
-1529316783566	geckodriver::marionette	INFO	Starting browser C:\Program Files (x86)\Mozilla Firefox\firefox.exe
-1529316783613	geckodriver::marionette	INFO	Connecting to Marionette on localhost:57194
-Error restarting: The system cannot find the file specified.
-
-1529316789539	addons.manager	DEBUG	Application has been upgraded
-1529316789862	addons.manager	DEBUG	Loaded provider scope for resource://gre/modules/addons/XPIProvider.jsm: ["XPIProvider"]
+1541847155325	geckodriver	INFO	Listening on 127.0.0.1:61571
+1541847158316	mozprofile::profile	INFO	Using profile path C:\Users\MSTEMP~1\AppData\Local\Temp\rust_mozprofile.xxjrOiyrefIG
+1541847158371	geckodriver::marionette	INFO	Starting browser C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+1541847158442	geckodriver::marionette	INFO	Connecting to Marionette on localhost:61588
+1541847160073	Marionette	INFO	Listening on port 61588
+1541847163477	Marionette	INFO	startBrowser a229959c-a773-4d32-ae12-d4071b807352
+16789862	addons.manager	DEBUG	Loaded provider scope for resource://gre/modules/addons/XPIProvider.jsm: ["XPIProvider"]
 1529316789867	addons.manager	DEBUG	Loaded provider scope for resource://gre/modules/LightweightThemeManager.jsm: ["LightweightThemeManager"]
 1529316789875	addons.manager	DEBUG	Loaded provider scope for resource://gre/modules/addons/GMPProvider.jsm
 1529316789878	addons.manager	DEBUG	Loaded provider scope for resource://gre/modules/addons/PluginProvider.jsm
