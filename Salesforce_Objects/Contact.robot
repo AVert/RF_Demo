@@ -123,7 +123,7 @@ Contact Creation Without Salutation
     Input Text    ${Email_E}    ${Contact_Email_V}
     Set Selenium Implicit Wait  5s
     Input Text      ${BirthDateElement_E}      ${Birth_Date_V}
-    Input Text      ${Preffered_Phone_E}    ${Preffered_Phone_V}
+    #Input Text      ${Preffered_Phone_E}    ${Preffered_Phone_V}
     Input Text      ${Home_Phone_E}     ${HomePhone_V}
     Input Text      ${Mobile_Phone_E}   ${Mobile_V}
     Input Text      ${workphone_e}      ${WorkPhone_V}
@@ -151,7 +151,7 @@ Contact Creation With Salutation
     Input Text    ${Mailing_Country_E}    ${Mail_Country_V}
     Input Text    ${Mailing_state_E}    ${Mail_State_V}
     Input Text    ${Mailing_Zip_E}    ${Mail_Code_V}
-    Click Element    ${Do Not Mail_Checkbox_E}
+    #Click Element    ${Do Not Mail_Checkbox_E}
     Input Text    ${Email_E}    ${Contact_Email_V}
     Input Text      ${Home_Phone_E}     ${HomePhone_V}
     Input Text      ${Mobile_Phone_E}   ${Mobile_V}
@@ -160,6 +160,112 @@ Contact Creation With Salutation
     Set Selenium Implicit Wait  5s
     Input Text      ${BirthDateElement_E}      ${Birth_Date_V}
     Click Element    ${Continue/Save_E}
+
+
+Contact Creation With Home Phone
+    Wait Until Element Is Visible    ${Contact_Tab_E}
+    Click Element    ${Contact_Tab_E}
+    Wait Until Element Is Visible    ${New_Button}
+    Click Button    ${New_Button}
+    Set Selenium Implicit Wait    20s
+    Click Element    ${Continue_E}
+    Set Selenium Implicit Wait    10s
+    Set Selenium Speed    .10s
+    Input Text    ${FirstName_Contact_E}   ${FirstName_V}
+    Input Text    ${LastName_Contact_E}   ${LastName_V}
+    Input Text    ${SpouseName_E}     ${SpouseName_V}
+    #@{Salu}=    Get List Items    ${Salutation_E}
+    #Select From List By Value    ${Salutation_E}    @{Salu}[0]
+    Input Text      ${NickName_E}   ${NickName_V}
+    #Click Element    ${Deceased_Checkbox_E}
+    Input Text    ${Mailing_Address_Street_E}    ${Mail_Street_V}
+    Input Text    ${Mailing_City_E}    ${Mail_City_V}
+    Input Text    ${Mailing_Country_E}    ${Mail_Country_V}
+    Input Text    ${Mailing_state_E}    ${Mail_State_V}
+    Input Text    ${Mailing_Zip_E}    ${Mail_Code_V}
+    #Click Element    ${Do Not Mail_Checkbox_E}
+    Input Text    ${Email_E}    ${Contact_Email_V}
+    Set Selenium Implicit Wait  5s
+    Input Text      ${BirthDateElement_E}      ${Birth_Date_V}
+    @{PreferPhone}=    Get List Items    ${Preffered_Phone_E}
+    Select From List By Value    ${Preffered_Phone_E}     @{PreferPhone}[1]
+    #Input Text      ${Preffered_Phone_E}    ${Preffered_Phone_V}
+    Input Text      ${Home_Phone_E}     ${HomePhone_V}
+    Input Text      ${Mobile_Phone_E}   ${Mobile_V}
+    Input Text      ${workphone_e}      ${WorkPhone_V}
+    Input Text      ${WorkPhone_Extension_E}    ${WorkPhone_Extension_V}
+    Click Element    ${Continue/Save_E}
+
+Contact Creation With Mobile
+    Wait Until Element Is Visible    ${Contact_Tab_E}
+    Click Element    ${Contact_Tab_E}
+    Wait Until Element Is Visible    ${New_Button}
+    Click Button    ${New_Button}
+    Set Selenium Implicit Wait    20s
+    Click Element    ${Continue_E}
+    Set Selenium Implicit Wait    10s
+    Set Selenium Speed    .10s
+    Input Text    ${FirstName_Contact_E}   ${FirstName_V}
+    Input Text    ${LastName_Contact_E}   ${LastName_V}
+    Input Text    ${SpouseName_E}     ${SpouseName_V}
+    #@{Salu}=    Get List Items    ${Salutation_E}
+    #Select From List By Value    ${Salutation_E}    @{Salu}[0]
+    Input Text      ${NickName_E}   ${NickName_V}
+    #Click Element    ${Deceased_Checkbox_E}
+    Input Text    ${Mailing_Address_Street_E}    ${Mail_Street_V}
+    Input Text    ${Mailing_City_E}    ${Mail_City_V}
+    Input Text    ${Mailing_Country_E}    ${Mail_Country_V}
+    Input Text    ${Mailing_state_E}    ${Mail_State_V}
+    Input Text    ${Mailing_Zip_E}    ${Mail_Code_V}
+    #Click Element    ${Do Not Mail_Checkbox_E}
+    Input Text    ${Email_E}    ${Contact_Email_V}
+    Set Selenium Implicit Wait  5s
+    Input Text      ${BirthDateElement_E}      ${Birth_Date_V}
+    @{PreferPhone}=    Get List Items    ${Preffered_Phone_E}
+    Select From List By Value    ${Preffered_Phone_E}     @{PreferPhone}[3]
+    #Input Text      ${Preffered_Phone_E}    ${Preffered_Phone_V}
+    Input Text      ${Home_Phone_E}     ${HomePhone_V}
+    Input Text      ${Mobile_Phone_E}   ${Mobile_V}
+    Input Text      ${workphone_e}      ${WorkPhone_V}
+    Input Text      ${WorkPhone_Extension_E}    ${WorkPhone_Extension_V}
+    Click Element    ${Continue/Save_E}
+
+Contact Creation With Work Phone
+    Wait Until Element Is Visible    ${Contact_Tab_E}
+    Click Element    ${Contact_Tab_E}
+    Wait Until Element Is Visible    ${New_Button}
+    Click Button    ${New_Button}
+    Set Selenium Implicit Wait    20s
+    Click Element    ${Continue_E}
+    Set Selenium Implicit Wait    10s
+    Set Selenium Speed    .10s
+    Input Text    ${FirstName_Contact_E}   ${FirstName_V}
+    Input Text    ${LastName_Contact_E}   ${LastName_V}
+    Input Text    ${SpouseName_E}     ${SpouseName_V}
+    #@{Salu}=    Get List Items    ${Salutation_E}
+    #Select From List By Value    ${Salutation_E}    @{Salu}[0]
+    Input Text      ${NickName_E}   ${NickName_V}
+    #Click Element    ${Deceased_Checkbox_E}
+    Input Text    ${Mailing_Address_Street_E}    ${Mail_Street_V}
+    Input Text    ${Mailing_City_E}    ${Mail_City_V}
+    Input Text    ${Mailing_Country_E}    ${Mail_Country_V}
+    Input Text    ${Mailing_state_E}    ${Mail_State_V}
+    Input Text    ${Mailing_Zip_E}    ${Mail_Code_V}
+    #Click Element    ${Do Not Mail_Checkbox_E}
+    Input Text    ${Email_E}    ${Contact_Email_V}
+    Set Selenium Implicit Wait  5s
+    Input Text      ${BirthDateElement_E}      ${Birth_Date_V}
+    @{PreferPhone}=    Get List Items    ${Preffered_Phone_E}
+    Select From List By Value    ${Preffered_Phone_E}     @{PreferPhone}[2]
+    #Input Text      ${Preffered_Phone_E}    ${Preffered_Phone_V}
+    Input Text      ${Home_Phone_E}     ${HomePhone_V}
+    Input Text      ${Mobile_Phone_E}   ${Mobile_V}
+    Input Text      ${workphone_e}      ${WorkPhone_V}
+    Input Text      ${WorkPhone_Extension_E}    ${WorkPhone_Extension_V}
+    Click Element    ${Continue/Save_E}
+
+
+
 
 Get values from Contact record
     ${contactName}=    Get Text    ${Contact_Name_VE}
@@ -295,7 +401,7 @@ Household/Reliance_Contact_Verification
     Set Global Variable    ${contactName}
     ${AccountName}=    Get Text    ${Account_Name_VE}
     Set Global Variable    ${AccountName}
-    Should Be Equal  ${AccountName}      ${contactName} Household
+    #Should Be Equal  ${AccountName}      ${contactName} Household
     ${Cont_PreviousEmail}=    Get Text    ${Emai_VE}
     Set Global Variable    ${Cont_PreviousEmail}
     ${Greeting_Value}=  Get Text    ${Greeting_Value_VE}
@@ -304,13 +410,13 @@ Household/Reliance_Contact_Verification
     Set Global Variable  ${Address_Value}
     ${Primary_Phone}=   Get Value   ${Primary_Phone_VE}
     Set Global Variable  ${Primary_Phone}
-    ${Greeting_String1}=     Catenate    Mr.     ${Greeting_Value}
+    ${Greeting_String1}=     Catenate    Ms.     ${LastName_V}
     Set Global Variable   ${Greeting_String1}
     ${Gretting_String2}=     catenate    ${FirstName_V}  ${SpouseName_V}
     Set Global Variable   ${Gretting_String2}
-    ${String3}=     Catenate  Mr.   ${ContactName}
+    ${String3}=     Catenate  Ms.   ${ContactName}
     Set Global Variable  ${String3}
-    ${WorkPhone}=   Catenate    SEPARATOR= X     ${WorkPhone_V}  ${WorkPhone_Extension_V}
+    ${WorkPhone}=   Catenate    SEPARATOR= X         ${WorkPhone_V}  ${WorkPhone_Extension_V}
     Set Global Variable  ${WorkPhone}
 
 Church_Household_Contact_Verification
@@ -364,6 +470,7 @@ Related Addres_Related List_From_Contact
     \    Exit For Loop
 
 Related Email_RelatedList_From_Contact
+
     ${RE_Relate list}=    Get Matching Xpath Count    xpath=..//*[@id='0031b00000RyUIX_00Nf4000009henH_body']/table/tbody/tr
     Log    ${RE_Relate list}
     ${RE-Col_Count}=    Get Matching Xpath Count    xpath=.//*[@id='0031b00000RyUIX_00Nf4000009henH_body']/table/tbody/tr[1]/th
