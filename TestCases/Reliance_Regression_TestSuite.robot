@@ -28,7 +28,7 @@ ${Cancel}         name=cancel
 
 *** Test Cases ***
 ADF_REL-01
-    [Tags]  Smoke
+    [Tags]  Demo
     [Documentation]    *Functionality*
     ...    To Verify the household contact creation
     ...
@@ -78,11 +78,11 @@ ADF_REL-01
     Contact Creation With Salutation
     Set Selenium Implicit Wait  15s
     Verifying_Greeting_Field_Value
-    Should Be Equal  ${Greeting_Value}  ${Gretting_String2}
+    Should Be Equal  ${Greeting_Value}  ${FirstName_V}
     Close Browser
 
 ADF_REL-02
-    [Tags]  Smoke
+    [Tags]  Demo
     [Documentation]    *Functionality*
     ...    To check whether the "Greeting" field value is updated or not,  when a user creating the
     ...    household contact record with "Salutation"   field value
@@ -138,7 +138,7 @@ ADF_REL-02
 
 ADF_REL-03
 
-    [Tags]  Smoke
+    [Tags]  Demo
     [Documentation]    *Functionality*
     ...    To check whether the "Greeting" field value is updated or not,  when a user creating the household contact record
     ...
@@ -193,7 +193,7 @@ ADF_REL-03
 
 ADF_REL-04
 
-    [Tags]  Smoke
+    [Tags]  Demo
     [Documentation]    *Functionality*
     ...    To check whether the "Greeting" field value, when a user creating the household contact record with "Nickname" field value.
     ...
@@ -248,7 +248,7 @@ ADF_REL-04
 
 ADF_REL-05
 
-    [Tags]  Smoke
+    [Tags]  Demo
     [Documentation]    *Functionality*
     ...    To check whether the "Phone" field value is updated or not based on the selection of "Preferred Phone" type, while creating a new contact record.
     ...
@@ -297,14 +297,14 @@ ADF_REL-05
     set global variable  ${Birth_Date_V}
     ${Home_Phone_V}=    read_excel_data  Contact     ADF_REL-05    Home Phone
     set global variable  ${Home_Phone_V}
-    ${Mobile_V}=   read_excel_data  Contact     ADF_REL-05     Mobile
+    ${Mobile_V}=   read_excel_data      Contact     ADF_REL-05     Mobile
     set global variable  ${Mobile_V}
     ${WorkPhone_V}   read excel data     Contact     ADF_REL-05     Work Phone
     set global variable  ${WorkPhone_V}
     ${WorkPhone_Extension_V}   read excel data     Contact     ADF_REL-05     Work Phone Extension
     set global variable  ${WorkPhone_Extension_V}
     Log_into_Salesforce
-    Contact Creation Without Salutation
+    Contact Creation With Home Phone
     Set Selenium Implicit Wait  15s
     Verify_Preffered_Phone_Value
     Should Be Equal  ${Primary_Phone}   ${HomePhone_V}
@@ -372,7 +372,7 @@ ADF_REL-06
     ${Preffered_Phone_V}=       read excel data     Contact     ADF_REL-06     Preffered Phone
     set global variable  ${Preffered_Phone_V}
     Log_into_Salesforce
-    Contact Creation Without Salutation
+    Contact Creation With Mobile
     Set Selenium Implicit Wait  15s
     Verify_Preffered_Phone_Value
     Should Be Equal  ${Primary_Phone}   ${Mobile_V}
@@ -430,7 +430,7 @@ ADF_REL-07
     set global variable  ${Birth_Date_V}
     ${Home_Phone_V}=    read_excel_data  Contact     ADF_REL-07    Home Phone
     set global variable  ${Home_Phone_V}
-    ${Mobile_V}=   read_excel_data  Contact     ADF_REL-07     Mobile
+    ${Mobile_V}=   read_excel_data  Contact     ADF_REL-07      Mobile
     set global variable  ${Mobile_V}
     ${WorkPhone_V}=   read excel data     Contact     ADF_REL-07     Work Phone
     set global variable  ${WorkPhone_V}
@@ -439,7 +439,7 @@ ADF_REL-07
     ${Preffered_Phone_V}=       read excel data     Contact     ADF_REL-07     Preffered Phone
     set global variable  ${Preffered_Phone_V}
     Log_into_Salesforce
-    Contact Creation Without Salutation
+    Contact Creation With Work Phone
     Set Selenium Implicit Wait  15s
     Verify_Preffered_Phone_Value
     Should Be Equal  ${Primary_Phone}   ${WorkPhone}
@@ -494,7 +494,7 @@ ADF_REL-08
     Close Browser
 
 ADF_REL-09
-
+    [Tags]  Regression
       [Documentation]    To verify whether the related address and email record is created or not, when updating the contact's mailing address and email field
     ...
     ...    *Test Steps*
@@ -535,6 +535,7 @@ ADF_REL-09
     Close Browser
 
 ADF_REG-10
+    [Tags]  Regression
     [Documentation]    To verify whether the related address and email record is created or not, when updating the contact's mailing address and email field
     ...    *Test Steps*
     ...
@@ -575,6 +576,7 @@ ADF_REG-10
     Close Browser
 
 ADF_REL-11
+    [Tags]  Smoke
     [Documentation]    *Functionality*
     ...    To verify whether the Organization Donor Proxy Contact record is created or not, when creating a Organization Account
     ...
@@ -595,25 +597,24 @@ ADF_REL-11
     ...    9.1 Organization Donor Proxy Contact record shoould be created with name of Organization account
 
     #TestCase
-    ${Acc_Name_V}=    read_excel_data   Account     TC5     AccountName
+    ${Acc_Name_V}=    read_excel_data   Account     ADF_REL-11    AccountName
     set global variable  ${Acc_Name_V}
-    ${Bill_St_V}=     read_excel_data   Account     TC5     BillingStreet
+    ${Bill_St_V}=     read_excel_data   Account     ADF_REL-11     BillingStreet
     set global variable  ${Bill_St_V}
-    ${Bill_City_V}=   read_excel_data   Account     TC5     BillingCity
+    ${Bill_City_V}=   read_excel_data   Account     ADF_REL-11     BillingCity
     set global variable  ${Bill_City_V}
-    ${Bill_Code_V}=   read_excel_data   Account          TC5     BillingZipCode
+    ${Bill_Code_V}=   read_excel_data   Account          ADF_REL-11     BillingZipCode
     set global variable  ${Bill_Code_V}
-    ${Bill_State_V}=      read_excel_data   Account     TC5      BillingState
+    ${Bill_State_V}=      read_excel_data   Account     ADF_REL-11      BillingState
     set global variable  ${Bill_State_V}
-    ${Bill_Country_V}=    read_excel_data   Account      TC5     BillingCountry
+    ${Bill_Country_V}=    read_excel_data   Account      ADF_REL-11     BillingCountry
     set global variable  ${Bill_Country_V}
     Common_Configure.Log_into_Salesforce
     Account.Organization_Account_Creation
-    Account.Organization_Account_Verification
-    ODP_Contact_Verification_From_Account
+    Account.ODP_Contact_Verification_From_Account
 
 ADF_REL-12
-    [Tags]  Smoke
+    [Tags]  Smoke   Regression
     [Documentation]    *Functionality*
     ...    To verify whether the new contact record is created or not under the household account by clicking "New" button
     ...
