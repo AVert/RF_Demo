@@ -31,10 +31,12 @@ ${Denomination_E}       xpath=.//*[@id='00Nf400000AI7eb_ileinner']
 ${Account_Type_E}       xpath=.//*[@id='acc6_ileinner']
 ${Billing_Address_Table_E}      xpath=.//*[@id='acc17_ileinner']/table/tbody/tr[1]/td
 ${ODP_Contact_E}    xpath=.//*[@id='0011b00000YQWiy_RelatedContactList_body']/table/tbody/tr[2]/th/a
+${AccountName}  IdaMyers_Church
 
-
-
-
+${UsernameElement}      Id=username
+${PasswordElement}      Id=password
+${Submit}       Id=Login
+${URL} =  https://test.salesforce.com
 
 
 *** Keywords ***
@@ -57,7 +59,7 @@ Organization_Account_Creation
     Click Element    ${Save}
     Capture Page Screenshot
 
-Get values from Contact record
+Get_values_from_Contact_record
     ${Account_Owner}=   Get Text    ${Account_Owner_VE}
     Set Global Variable      ${Account_Owner}
     ${Account_Type}=    Get Text    ${Account_Type_VE}
@@ -71,7 +73,7 @@ Organization_Account_Verification
 
 Household_Account_Verification
 
-    Input text
+
 
 
 
@@ -92,22 +94,42 @@ Account_Table_Iteration
     Log    ${Row_Count}
     : FOR    ${i}    IN RANGE    1    ${Row_Count}+1
     \    Log    ${i}
-    \    ${GetTablevalue}=    Get Value    xpath=.//*[@id='bodyCell']/div[3]/div[1]/div/div[2]/table/tbody/tr[${i}]/th
+    \    ${GetTablevalue}=    Get Text    xpath=.//*[@id='bodyCell']/div[3]/div[1]/div/div[2]/table/tbody/tr[${i}]/th
     \    Log    ${GetTablevalue}
-    \    Run Keyword If    "${GetTablevalue}"=="${AccountName}"    Click Element    xpath=.//*[@id='bodyCell']/div[3]/div[1]/div/div[2]/table/tbody/tr[${i}]/th/a
-    \    Exit For Loop If    "${GetTablevalue}"=="Test Demo"
+    \    Run Keyword If    "${GetTablevalue}"=="Kerry Dennis Household"    Click Element    xpath=.//*[@id='bodyCell']/div[3]/div[1]/div/div[2]/table/tbody/tr[${i}]/th/a
+    \    Exit For Loop If    "${GetTablevalue}"=="Kerry Dennis Household"
     Sleep    10s
     Wait Until Element Is Visible   ${EditButton_E}
 
 Household_Contact_Creation_From_Account
-    Click Element  xpath=.//*[@id='0011b00000ZAEZe_RelatedContactList']/div[1]/div/div[1]/table/tbody/tr/td[2]/input
+    Click Element  xpath=.//h3[contains(.,'Contact')]/following::input[@name='new']
     Wait Until Element Is Visible   ${save}
     Contact Creation With Salutation
 
+Account_Billing_Address
 
+    Click Element  ${Edit_Button}
+    ${Biling_Street_Value}=     Get Text    ${Billing_Street_E}
+    Set Global Variable  ${Biling_Street_Value}
+    ${Billing_City_Value}=      Get Text    ${Billing_City_E}
+    Set Global Variable  ${Billing_City_Value}
+    ${Billing_Country_Value}=   Get Text    ${Billing_Country_E}
+    Set Global Variable   ${Billing_Country_Value}
+    ${Billing_State_Value}=     Get Text    ${Billing_State_E}
+    Set Global Variable  ${Billing_State_Value}
+    ${Billing_Zip_Value}=   Get Text    ${Billing_Zip_E}
+    Set Global Variable  ${Billing_Zip_Value}
 
+Updating_The_Billing_Address
 
-
+    Clear Element Text  ${Billing_Country_E}
+    Input Text  ${Billing_Country_E}    Test
+    Click Element  ${Continue/Save_E}
+    ${Alert}=    Get Text    xpath=.//*[@id='errorDiv_ep']
+    Log    ${Alert}
+    Take Screenshot Without Embedding
+    Element Should Not Be Visible    ${Edit_Button}
+    Click Button    ${Cancel}
 
 
 
