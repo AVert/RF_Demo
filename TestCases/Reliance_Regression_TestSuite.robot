@@ -7,7 +7,8 @@ Resource  ../Salesforce_Objects/Contact.robot
 Resource  ../Salesforce_Objects/Account.robot
 Resource  ../Salesforce_Objects/Donation.robot
 Library     ../CustomLibrary/ExcelUtilities.py
-Variables   ../TestCases/TestSuiteVariables.robot
+#Variables   TestSuiteVariables.robot
+Resource   TestSuiteVariables.robot
 #Resource    ../TestCases/TestSuiteVariables.robot
 #Suite Setup     Log_into_Salesforce
 
@@ -133,8 +134,8 @@ ADF_REL-02
     Set Selenium Implicit Wait  15s
     Verifying_Greeting_Field_Value
     Should Be Equal  ${Greeting_Value}  ${Greeting_String1}
+    Capture Page Screenshot
     Close Browser
-
 
 ADF_REL-03
 
@@ -164,9 +165,9 @@ ADF_REL-03
     Set Global Variable   ${FirstName_V}
     ${LastName_V}=    read_excel_data  Contact      ADF_REL-03    LastName
     Set Global Variable     ${LastName_V}
-    ${Salutation_V}=    read_excel_data  Contact      ADF_REL-04    Salutation
+    ${Salutation_V}=    read_excel_data  Contact      ADF_REL-03    Salutation
     Set Global Variable   ${Salutation_V}
-    ${NickName_V}=    read_excel_data  Contact      ADF_REL-04    NickName
+    ${NickName_V}=    read_excel_data  Contact      ADF_REL-03    NickName
     Set Global Variable   ${NickName_V}
     ${SpouseName_V}=  read_excel_data  Contact     ADF_REL-03    SpouseName
     Set Global Variable  ${SpouseName_V}
@@ -189,11 +190,12 @@ ADF_REL-03
     Set Selenium Implicit Wait  15s
     Verifying_Greeting_Field_Value
     Should Be Equal  ${Greeting_Value}  Friend
+    Capture Page Screenshot
     close browser
 
 ADF_REL-04
 
-    [Tags]  Demo
+    [Tags]  Demo1
     [Documentation]    *Functionality*
     ...    To check whether the "Greeting" field value, when a user creating the household contact record with "Nickname" field value.
     ...
@@ -244,11 +246,12 @@ ADF_REL-04
     Set Selenium Implicit Wait  15s
     Verifying_Greeting_Field_Value
     Should Be Equal  ${Greeting_Value}  ${NickName_V}
+    Capture Page Screenshot
     Close Browser
 
 ADF_REL-05
 
-    [Tags]  Demo
+    [Tags]  Demo1
     [Documentation]    *Functionality*
     ...    To check whether the "Phone" field value is updated or not based on the selection of "Preferred Phone" type, while creating a new contact record.
     ...
@@ -310,7 +313,6 @@ ADF_REL-05
     Should Be Equal  ${Primary_Phone}   ${HomePhone_V}
     Capture Page Screenshot
     Close Browser
-
 
 ADF_REL-06
 
@@ -379,7 +381,6 @@ ADF_REL-06
     Capture Page Screenshot
     Close Browser
 
-
 ADF_REL-07
 
     [Tags]  Smoke
@@ -446,7 +447,7 @@ ADF_REL-07
     Close Browser
 
 ADF_REL-08
-    [Tags]  Smoke
+    [Tags]  Smoke  Test2
     [Documentation]    *Functionality*
     ...    To Verify the Communication preffernce field in Household contact
     ...
@@ -494,7 +495,7 @@ ADF_REL-08
     Close Browser
 
 ADF_REL-09
-    [Tags]  Regression
+    [Tags]  Test5
       [Documentation]    To verify whether the related address and email record is created or not, when updating the contact's mailing address and email field
     ...
     ...    *Test Steps*
@@ -522,7 +523,7 @@ ADF_REL-09
     Click Element    ${Contact_Tab}
     Wait Until Element Is Visible    ${New_Button}
     Contact.Contact_Table_Iteration
-    Contact.Contact_Field_Verification
+    Contact.Get_values_from_Contact_record
     Click Button    ${Edit_Button}
     Input Text    ${Email}  ${Related_Email_Update}
     Click Button    ${Continue/Save}
@@ -535,7 +536,7 @@ ADF_REL-09
     Close Browser
 
 ADF_REG-10
-    [Tags]  Regression
+    [Tags]  Test5
     [Documentation]    To verify whether the related address and email record is created or not, when updating the contact's mailing address and email field
     ...    *Test Steps*
     ...
@@ -563,7 +564,7 @@ ADF_REG-10
     Click Element    ${Contact_Tab}
     Wait Until Element Is Visible    ${New_Button}
     Contact.Contact_Table_Iteration
-    Contact.Contact_Field_Verification
+    Contact.Get_values_from_Contact_record
     Click Button    ${Edit_Button}
     Contact.Contact_Exsting_Address
     Click Button    ${Continue/Save}
@@ -614,7 +615,8 @@ ADF_REL-11
     Account.ODP_Contact_Verification_From_Account
 
 ADF_REL-12
-    [Tags]  Smoke   Regression
+
+    [Tags]  Smoke   Regression  Test7
     [Documentation]    *Functionality*
     ...    To verify whether the new contact record is created or not under the household account by clicking "New" button
     ...
@@ -662,7 +664,8 @@ ADF_REL-12
     Head_Of_Household_Verifcation_For_SecondContact
 
 ADF_REL-13
-    [Tags]  Smoke
+
+    [Tags]  Test7
     [Documentation]    *Functionality*
     ...    To verify whether the Head of Household flag is updated or not, when user creating the second record with HOH is chencked
     ...    *Test Steps*
@@ -711,8 +714,9 @@ ADF_REL-13
 
 ADF_REL-14
 
+    [Tags]
     [Documentation]    *Functionality*
-    ...    To verify whether the donation contact role record is created or not
+    ...    To verify whether the donation record is created or not
     ...
     ...    *Test Steps*
     ...
@@ -734,19 +738,20 @@ ADF_REL-14
     ...    11.2 New \ soft credit contact role record should \ be created \ from the donor's relaitionship viwer VF page
 
     #TestCase
-    ${Don_Name_V}=   read excel data     Donation    TC4     DonationName
+    ${Don_Name_V}=   read excel data     Donation    ADF_REL-14     DonationName
     Set Global Variable  ${Don_Name_V}
-    ${Don_Donor_V}=  read excel data  Donation   TC4     Donor
+    ${Don_Donor_V}=  read excel data  Donation   ADF_REL-14      Donor
     Set Global Variable  ${Don_Donor_V}
-    ${Don_Amt_V}=    read excel data     Donation    TC4     Amount
+    ${Don_Amt_V}=    read excel data     Donation    ADF_REL-14      Amount
     Set Global Variable  ${Don_Amt_V}
-    ${Don_Sourcecode_V}=    read excel data  Donation   TC4     SourceCode
+    ${Don_Sourcecode_V}=    read excel data  Donation   ADF_REL-14      SourceCode
     Set Global Variable  ${Don_Sourcecode_V}
     Donation.Donation_Creation
     Close Browser
 
 ADF_REG-15
 
+    [Tags]
     [Documentation]    *Functionality*
     ...    To verify whether the donation contact role record is created or not
     ...
@@ -774,9 +779,8 @@ ADF_REG-15
     Donation.Donation_Donor_Role_Verification
     Close Browser
 
-
 ADF_REL-16
-
+    [Tags]
     [Documentation]   *Functionality*
     ...    To verify whether the Donation name is updated or not when updating the Donor
 
@@ -786,6 +790,7 @@ ADF_REL-16
     Close Browser
 
 ADF_REG-17
+    [Tags]  Test1
     [Documentation]    *Functionality*
     ...
     ...    To verify the Desigation VF page after creating the Donation record
@@ -814,6 +819,7 @@ ADF_REG-17
     Close Browser
 
 ADF_REG-18
+    [Tags]  Demo
     [Documentation]    *Functionality*
     ...
     ...    To check whether the \ "Head Of Household " is checked or not while creating the new household contact record
@@ -845,7 +851,7 @@ ADF_REG-18
     Close Browser
 
 ADF_REG-19
-
+    [Tags]  Test6
     [Documentation]    *Functionality*
     ...    To verify whether the donation contact role record is created or not
     ...
@@ -875,6 +881,7 @@ ADF_REG-19
 
 ADF_REG-20
 
+    [Tags]  Test6
     [Documentation]    *Functionality*
     ...    To verify whether the donation contact role record is created or not
     ...
@@ -901,6 +908,398 @@ ADF_REG-20
     Common_Configure.Log_into_Salesforce
     Donation.Add_New_Multiple_Contact_Role
     Close Browser
+
+ADF_REG-21
+
+    [Tags]  Donation
+    [Documentation]    *Functionality*
+    ...    To verify whether the donation record is created or not from contact
+    ...
+    Common_Configure.Log_into_Salesforce
+    Donation.Donation_Creation_From_Contact
+
+ADF_REG-22
+
+    [Tags]  Donation
+    [Documentation]    *Functionality*
+    ...    To verify whether the donation record is created or not from contact
+    ${ContactName_Value}=     read excel data     Donation     ADF_REG-22      Contact
+    Set Global Variable  ${ContactName_Value}
+    Common_Configure.Log_into_Salesforce
+    Donation.Contact_Relationship_Viewer1
+
+ADF_REG-23
+
+    [Tags]  Donation
+    [Documentation]    *Functionality*
+    ...    To verify whether the donation record is created or not from contact
+
+
+    Common_Configure.Log_into_Salesforce
+    Updating_the_Donor_For_ReceivedDonaton
+
+ADF-REG-24
+
+    [Tags]  Donation
+    [Documentation]    *Functionality*
+    ...    To verify whether the CampaignSegment, Sourcecode
+
+    ${DonationName_V}=     read excel data     Donation     ADF_REG-24      Donation
+    Set Global Variable  ${DonationName_V}
+    Common_Configure.Log_into_Salesforce
+    Updating_the_SourceCode_Value
+    Verfiying_SourceCode_Value
+
+ADF_REG-25
+
+    [Tags]  Donation
+    [Documentation]    *Functionality*
+    ...    To verify whether the CampaignSegment, Sourcecode
+    ${DonationName_V}=     read excel data     Donation     ADF_REG-25      Donation
+    Set Global Variable  ${DonationName_V}
+    Common_Configure.Log_into_Salesforce
+    Updating_the_CampaignSegment_Value
+    Verfiying_SourceCode_Value
+
+ADF-REG-26
+
+    [Tags]  Contact
+    [Documentation]    *Functionality*
+    ...    To verify whether the Contact Record Type (Household To International) Change
+
+    ${ContactName_Value}=     read excel data     Contact     ADF_REG-26      Contact Value
+    Set Global Variable  ${ContactName_Value}
+    Common_Configure.Log_into_Salesforce
+    #Contact_Table_Iteration
+    Contact_Choose
+    Updating_the_Contact_Recordtype
+
+ADF_REG-27
+
+    [Tags]  Contact
+    [Documentation]    *Functionality*
+    ...    To verify whether the Contact Record Type (ODP To Household) Change
+
+    ${ContactName_Value}=     read excel data     Contact     ADF_REG-27   Contact Value
+    Set Global Variable  ${ContactName_Value}
+    Common_Configure.Log_into_Salesforce
+    #Contact_Table_Iteration
+    Contact_Choose
+    Updating_the_Contact_Recordtype
+
+ADF-REG-28
+    [Tags]  Contact
+    [Documentation]    *Functionality*
+    ...    To verify whether the Contact Mailing address is updated to the Account's billing address
+
+    ${ContactName_Value}=     read excel data     Contact     ADF_REG-27   Contact Value
+    Set Global Variable  ${ContactName_Value}
+    Common_Configure.Log_into_Salesforce
+    #Contact_Table_Iteration
+    Contact_Choose
+    Comparision_BW_Mailing_Billing_Address
+
+ADF_REG-29
+    [Tags]  Contact
+    [Documentation]    *Functionality*
+    ...    To verify whether the Contact Billing address is updated or not
+    Common_Configure.Log_into_Salesforce
+    Account_Table_Iteration
+    Account_Billing_Address
+    Updating_The_Billing_Address
+
+ADF_REL-30
+    [Tags]  Demo1
+    [Documentation]    *Functionality*
+    ...    To check whether the "Addresse" field value is updated or not,  when a user creating the
+    ...    household contact record with "Salutation"   field value
+
+    ...    *Test Steps*
+    ...
+    ...    1. Open the sandbox "test.salesforce.com"
+    ...    2. Enter the valid username and password
+    ...    3. Click ""Submit"" button
+    ...    4. Navigates to "Contacy" object
+    ...    5. Click new button and then choose the record type
+    ...    6. Click continue button
+    ...    7. Enter the contact record details and Enter the values in the Salutation field
+    ...    8. Click save button
+    ...    9. Verfiy the expected result"
+    ...
+    ...    *Expected Result*
+    ...
+    ...    9.1 The "Greeting" field value should be updated as  " Mr Test 8 Aug_28"
+
+    #TestCase
+    ${FirstName_V}=    read_excel_data  Contact     ADF_REL-02     FirstName
+    Set Global Variable   ${FirstName_V}
+    ${LastName_V}=    read_excel_data  Contact      ADF_REL-02    LastName
+    Set Global Variable     ${LastName_V}
+    ${Salutation_V}=    read_excel_data  Contact      ADF_REL-02    Salutation
+    Set Global Variable   ${Salutation_V}
+    ${NickName_V}=    read_excel_data  Contact      ADF_REL-02   NickName
+    Set Global Variable   ${NickName_V}
+    ${SpouseName_V}=  read_excel_data  Contact     ADF_REL-02    SpouseName
+    Set Global Variable  ${SpouseName_V}
+    ${Mail_Street_V}=  read_excel_data  Contact     ADF_REL-02     MailingStreet
+    Set Global Variable  ${Mail_Street_V}
+    ${Mail_City_V}=   read_excel_data  Contact     ADF_REL-02    MailingCity
+    set global variable  ${Mail_City_V}
+    ${Mail_State_V}=  read_excel_data  Contact     ADF_REL-02     MailingState
+    set global variable  ${Mail_State_V}
+    ${Mail_Code_V}=   read_excel_data  Contact     ADF_REL-02     MailingZipCode
+    set global variable  ${Mail_Code_V}
+    ${Mail_Country_V}=    read_excel_data  Contact     ADF_REL-02     MailingCountry
+    set global variable  ${Mail_Country_V}
+    ${Contact_Email_V}=   read_excel_data  Contact     ADF_REL-02     Email
+    set global variable  ${Contact_Email_V}
+    ${Birth_Date_V}   read excel data     Contact     ADF_REL-02     BirthDate
+    set global variable  ${Birth_Date_V}
+    Log_into_Salesforce
+    Contact Creation With Salutation
+    Set Selenium Implicit Wait  15s
+    Verifying_Addresse_Field_Value
+    Should Be Equal     ${Address_Value}    ${Addresse_Verfied_Value}
+    Close Browser
+
+ADF_REG-31
+
+    [Tags]  Donation
+    [Documentation]    *Functionality*
+    ...    To verify whether the donation record is created with default designation or not
+    ...
+
+    ...    *Test Steps*
+    #Test Case
+    ${Don_Name_V}=   read excel data     Donation    ADF_REL-31    DonationName
+    Set Global Variable  ${Don_Name_V}
+    ${Don_Donor_V}=  read excel data  Donation   ADF_REL-31      Donor
+    Set Global Variable  ${Don_Donor_V}
+    ${Don_Amt_V}=    read excel data     Donation    ADF_REL-31    Amount
+    Set Global Variable  ${Don_Amt_V}
+    ${Don_Sourcecode_V}=    read excel data  Donation   ADF_REL-31     SourceCode
+    Set Global Variable  ${Don_Sourcecode_V}
+    Log_into_Salesforce
+    Donation.Donation_Creation
+    Verifying_Donation's_Desgination(Default)
+
+ADF_REG-32
+
+    [Tags]  Donation
+    [Documentation]    *Functionality*
+    ...    To verify whether the donation record is created with priamry campaign associated designation or not
+    ...
+
+    ...    *Test Steps*
+
+    #Test Case
+
+    ${Don_Name_V}=   read excel data     Donation    ADF_REL-32     DonationName
+    Set Global Variable  ${Don_Name_V}
+    ${Don_Donor_V}=  read excel data  Donation   ADF_REL-32     Donor
+    Set Global Variable  ${Don_Donor_V}
+    ${Don_Amt_V}=    read excel data     Donation    ADF_REL-32    Amount
+    Set Global Variable  ${Don_Amt_V}
+    ${Don_Sourcecode_V}=    read excel data  Donation   ADF_REL-32     SourceCode
+    Set Global Variable  ${Don_Sourcecode_V}
+    Log_into_Salesforce
+    Donation.Donation_Creation
+    Verifying_Donation's_Desgination(Primary_Campaign)
+
+ADF_REG-33
+
+    [Tags]  Donation
+    [Documentation]    *Functionality*
+    ...    To verify whether the donation name after updating the Donor Value
+    ...
+
+    ...    *Test Steps*
+
+    #Test Case
+
+    ${DonationValue_V}=     read excel data     Donation     ADF_REG-33      Donation
+    Set Global Variable  ${DonationValue_V}
+    Log_into_Salesforce
+    Verifying_the_Donation_Name
+
+ADF_REG-34
+
+    [Tags]  Donation
+    [Documentation]    *Functionality*
+    ...    To verify whether the contact's associated Donation's  record types are updated as "Board Member" or not, while creating a classification record
+    ...     Note: Classification record's 'Board Member Classification' = True
+
+    ...    *Test Steps*
+
+    ${ContactName_Value}=     read excel data     Contact     ADF_REG-34     Contact Value
+    Set Global Variable  ${ContactName_Value}
+    Log_into_Salesforce
+    #Contact_Table_Iteration
+    #Get_Donation_Records_Details_From_Contact_RelatedList
+    Contact_Choose
+    Classifcation_Record_Creation_From_Contact
+    Verfiying_Donations_Recordtype_After_Classifcation_Record_Creation
+
+ADF_REG-35
+
+    [Tags]  Donation
+    [Documentation]    *Functionality*
+    ...    To verify whether the contact's associated Donation's  record types are updated as "Board Member" or not, while updating a classification record
+    ...     Note: Classification record's 'Board Member Classification' = True
+
+    ...    *Test Steps*
+
+    ${ContactName_Value}=     read excel data     Contact     ADF_REG-36      Contact Value
+    Set Global Variable  ${ContactName_Value}
+    Log_into_Salesforce
+    Contact_Table_Iteration
+    #Get_Donation_Records_Details_From_Contact_RelatedList
+    Classifcation_Record_update_From_Contact
+    Verfiying_Donations_Recordtype_After_Classifcation_Record_Creation
+
+ADF_REG-36
+    [Tags]  Donation
+    [Documentation]    *Functionality*
+    ...    To verify whether the contact's associated Donation's  record types are updated as "Board Member" or not, while updating a classification record
+    ...     Note: Classification record's 'Board Member Classification' = True
+
+    ...    *Test Steps*
+
+    ${ContactName_Value}=     read excel data     Contact     ADF_REG-36      Contact Value
+    Set Global Variable  ${ContactName_Value}
+    Log_into_Salesforce
+    Contact_Table_Iteration
+    #Get_Donation_Records_Details_From_Contact_RelatedList
+    Classifcation_Record_update_From_Contact
+    Get_Donation_Records_Details_From_Contact_RelatedList
+
+ADF_REG-37
+
+     [Tags]  Donation
+     [Documentation]  *Functionality*
+    ...    To Verify the Communication preffernce field in ODP contact
+    ...
+    ...    *Test Steps*
+    ...
+    ...    1. Open the sandbox "test.salesforce.com"
+    ...    2. Enter the valid username and password
+    ...    3. Click ""Submit"" button
+    ...    4. Navigates to "Contacy" object
+    ...    5. Click new button and then choose the record type
+    ...    6. Click continue button
+    ...    7. Enter the contact record details
+    ...    8. Click Save button
+    ...    *Expected Result*
+    ...
+    ...    8.1 Communication prefference field should not be checked
+
+    #TestCase
+    ${FirstName_V}=    read_excel_data  Contact     ADF_REL-08    FirstName
+    Set Global Variable   ${FirstName_V}
+    ${LastName_V}=    read_excel_data  Contact      ADF_REL-08    LastName
+    Set Global Variable      ${LastName_V}
+    ${Salutation_V}=    read_excel_data  Contact      ADF_REL-08    Salutation
+    Set Global Variable   ${Salutation_V}
+    ${NickName_V}=    read_excel_data  Contact      ADF_REL-08     NickName
+    Set Global Variable   ${NickName_V}
+    ${SpouseName_V1}=  read_excel_data  Contact     ADF_REL-08     SpouseName
+    Set Global Variable  ${SpouseName_V1}
+    ${Mail_Street_V}=  read_excel_data  Contact     ADF_REL-08     MailingStreet
+    Set Global Variable  ${Mail_Street_V}
+    ${Mail_City_V}=   read_excel_data  Contact     ADF_REL-08     MailingCity
+    set global variable  ${Mail_City_V}
+    ${Mail_State_V}=  read_excel_data  Contact     ADF_REL-08     MailingState
+    set global variable  ${Mail_State_V}
+    ${Mail_Code_V}=   read_excel_data  Contact     ADF_REL-08     MailingZipCode
+    set global variable  ${Mail_Code_V}
+    ${Mail_Country_V}=    read_excel_data  Contact     ADF_REL-08    MailingCountry
+    set global variable  ${Mail_Country_V}
+    ${Contact_Email_V}=   read_excel_data  Contact     ADF_REL-08     Email
+    set global variable  ${Contact_Email_V}
+    ${ContactName_Value}=   read_excel_data  Contact     ADF_REL-08     Update Contact
+    set global variable  ${ContactName_Value}
+    Log_into_Salesforce
+    Organization_Account_Creation
+    Contact_Table_Iteration
+    Set Selenium Implicit Wait  15s
+    ODP_Communicatoin_Prefference
+    Close Browser
+
+ADF_REG-38
+
+    [Tags]  Donation1
+     [Documentation]  *Functionality*
+    ...    TTo verify whether the Related address details are updated to the contact's mailing address fields or not
+    ...    When a user click 'Make Primary' button on Related address record
+    ...
+    ...    *Test Steps*
+    ...
+    ...    1. Open the sandbox "test.salesforce.com"
+    ...    2. Enter the valid username and password
+    ...    3. Click ""Submit"" button
+    ...    4. Navigates to "Contacy" object
+    ...    5. Click new button and then choose the record type
+    ...    6. Click continue button
+    ...    7. Enter the contact record details
+    ...    8. Click Save button
+    ...    *Expected Result*
+    ...
+    ...    8.1 Communication prefference field should not be checked
+
+    #TestCase
+    Log_into_Salesforce
+    Contact_Table_Iteration
+    Set Selenium Implicit Wait  15s
+    MakePrimary_Address_From_Relatesd_Address_Record
+    Close Browser
+
+ADF_REG-39
+
+    [Documentation]  *Functionality*
+    ...    TTo verify whether the campaign segment record is created or not
+    ...
+ADF_REG-40
+
+    [Documentation]  *Funcationality*
+
+    ...        To verify Active designations are displayed in Available Designation secion
+
+ADF_REG-41
+
+    [Documentation]  *Funcationality*
+
+    ...        To verify Designations is saved or not when updating the more than total amount
+
+ADF_REG-42
+
+     [Documentation]  *Funcationality*
+
+     ...        To verify the Find Duplicates VF pages
+
+ADF_REG-42
+
+     [Documentation]  *Funcationality*
+
+     ...        To verify the Relationship type detail record is created or not
+
+ADF_REG-43
+
+     [Documentation]  *Funcationality*
+
+      ...      To verify whether the Duplicate relationship record is created or not
+
+ADF_REG-44
+
+     [Documentation]  *Funcationality*
+
+      ...      To verify whether the relationship record is created or not with same First and Second conatact/Account
+
+ADF_REG-45
+    [Documentation]  *Funcationality*
+
+      ...      To verify whether the relationship record is created or not with same First and Second conatact/Account
+
+
 
 
 *** Keywords ***

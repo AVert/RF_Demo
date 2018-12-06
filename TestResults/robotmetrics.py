@@ -20,7 +20,7 @@ msg = MIMEMultipart()
 msg['Subject'] = 'ADFProject Automation Status'
 
 sender = 'nallavan.qa@gmail.com'
-recipients = ['nallavan.qa@gmail.com']
+recipients = ['nallavan.qa@gmail.com', 'nallavan@mstsolutions.com']
 ccrecipients = ['nall1sf@gmail.com', 'user4@yahoo.com']
 
 msg['From'] = sender

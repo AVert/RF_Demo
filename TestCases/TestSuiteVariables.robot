@@ -20,6 +20,8 @@ ${WorkPhone_V}=
 ${WorkPhone_Extension_V}=
 ${Home_Phone_V}=
 ${Preffered_Phone_V}=
+${ContactName_Value}=
+${Classification_Value}=
 
 #Account Variables
 ${Acc_Name_V}=
@@ -35,6 +37,8 @@ ${Don_Amt_V}=
 ${Don_Sourcecode_V}=
 ${Don_Donor_V}=
 ${Don_Date_V}=
+${DonationValue_V}=
+${DonationName_V}
 
 # Church Allinace signup form Variables
 ${ChurchName_V}
