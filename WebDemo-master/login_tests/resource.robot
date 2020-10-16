@@ -16,9 +16,16 @@ ${LOGIN URL}      http://${SERVER}/
 ${WELCOME URL}    http://${SERVER}/welcome.html
 ${ERROR URL}      http://${SERVER}/error.html
 
+${CHROMEDRIVER_PATH}        /usr/local/bin/chromedriver
+
+
 *** Keywords ***
 Open Browser To Login Page
-    Open Browser    ${LOGIN URL}    ${BROWSER}
+    ${chrome_options}=  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys, selenium.webdriver
+    Call Method    ${chrome_options}    add_argument    --no-sandbox
+    Call Method    ${chrome_options}    add_argument    --headless
+#    Open Browser    ${LOGIN URL}    ${BROWSER} options=${chrome_options}      executable_path=${CHROMEDRIVER_PATH}
+    Open Browser    ${LOGIN URL}    ${BROWSER}    options=${chrome_options}      executable_path=${CHROMEDRIVER_PATH}
     Maximize Browser Window
     Set Selenium Speed    ${DELAY}
     Login Page Should Be Open
